@@ -4,110 +4,571 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raffy Temporal | IT Professional</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES (BLUE THEME) --- */
+        :root {
+            --primary-blue: #0a3d6b; /* Deep Professional Blue */
+            --secondary-blue: #1e81b0; /* Mid Blue */
+            --accent-blue: #e0f2fe; /* Very Light Blue */
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --white: #ffffff;
+        }
+
+        /* --- GLOBAL STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Smooth scrolling for navbar links */
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-top: 70px; /* Space for fixed navbar */
+        }
+
+        h1, h2, h3 { color: var(--primary-blue); }
+        a { text-decoration: none; color: inherit; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- NAVIGATION BAR --- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            letter-spacing: 1px;
+        }
+
+        .logo span { color: var(--secondary-blue); }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: color 0.3s;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .nav-links li a:hover {
+            color: var(--secondary-blue);
+            background: var(--accent-blue);
+        }
+
+        .btn-contact {
+            background-color: var(--primary-blue);
+            color: var(--white) !important;
+            padding: 8px 20px !important;
+            border-radius: 20px !important;
+            transition: background 0.3s, transform 0.2s !important;
+        }
+
+        .btn-contact:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu Icon */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* --- UTILITY CLASSES --- */
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--secondary-blue);
+            border-radius: 2px;
+        }
+
+        /* Animation Class */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HERO SECTION --- */
+        header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: var(--white);
+            padding: 100px 0 120px 0;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            justify-content: space-between;
+        }
+
+        .hero-text { flex: 1; }
+        .hero-text h1 {
+            color: var(--white);
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 15px;
+        }
+        .hero-text h2 {
+            color: var(--accent-blue);
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 25px;
+        }
+        .hero-text p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* POP-OUT / CLIPPING MASK EFFECT CSS */
+        .hero-image-wrapper {
+            flex: 0 0 350px;
+            position: relative;
+            height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* Aligns image to bottom */
+        }
+
+        /* The Box/Shape behind the person */
+        .hero-shape {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 75%; /* Lower height so the head pops out */
+            background-color: var(--accent-blue);
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            z-index: 1;
+            border: 5px solid rgba(255,255,255,0.2);
+        }
+
+        /* The Transparent PNG Image */
+        .hero-image-wrapper img {
+            position: relative;
+            z-index: 2; /* Sits on top of the shape */
+            width: 120%; /* Slightly wider than the box */
+            max-height: 110%; /* Taller than the box so head pops out */
+            object-fit: cover;
+            object-position: bottom;
+            display: block;
+        }
+
+        /* --- SECTIONS --- */
+        section { padding: 90px 0; }
+        .bg-white { background-color: var(--white); }
+
+        .card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--secondary-blue);
+        }
+
+        /* Info Grid (Contact info moved inside Profile) */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+        .info-item i { color: var(--secondary-blue); margin-right: 10px; width: 20px;}
+
+        /* Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .skill-group h3 { margin-bottom: 15px; }
+        .badge-list { display: flex; flex-wrap: wrap; gap: 10px; }
+        .badge {
+            background-color: var(--accent-blue);
+            color: var(--primary-blue);
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(30, 129, 176, 0.2);
+            transition: all 0.3s;
+        }
+        .badge:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        /* Experience Timeline */
+        .timeline { max-width: 800px; margin: 0 auto; }
+        .timeline-item {
+            padding-left: 30px;
+            border-left: 4px solid var(--accent-blue);
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--white);
+        }
+        .timeline-date { color: var(--secondary-blue); font-weight: 700; margin-bottom: 5px;}
+        .timeline-title { font-size: 1.3rem; margin-bottom: 5px; }
+        .timeline-company { color: var(--text-light); font-style: italic; margin-bottom: 15px; }
+        .timeline-item ul { padding-left: 20px; color: var(--text-dark); }
+        .timeline-item ul li { margin-bottom: 10px; }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .project-card h3 { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .project-card h3 i { background: var(--accent-blue); padding: 15px; border-radius: 50%; }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        /* --- RESPONSIVE / MOBILE DESIGN --- */
+        @media (max-width: 768px) {
+            .hero-content { flex-direction: column-reverse; text-align: center; gap: 40px;}
+            header { clip-path: none; padding: 60px 0; }
+            .hero-image-wrapper { height: 350px; width: 80%; }
+            .hero-shape { height: 70%; }
+            .hero-text h1 { font-size: 2.5rem; }
+            
+            /* Mobile Navbar */
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background: var(--nav-bg);
+                width: 100%;
+                text-align: center;
+                padding: 20px 0;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                transition: left 0.3s;
+            }
+            .nav-links.active { left: 0; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="logo">RT.</div>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Raffy<span>.IT</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact" class="btn-contact">Contact Me</a></li>
+            </ul>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+        </div>
     </nav>
 
-    <!-- Hero / Intro Section -->
-    <header class="hero">
-        <h1>Hi, I'm <span class="highlight">Raffy Temporal</span></h1>
-        <p>IT Professional specializing in system deployment, networking, and technical support.</p>
-        <a href="#contact" class="btn">Get In Touch</a>
+    <!-- HERO SECTION -->
+    <header id="home">
+        <div class="container hero-content">
+            <div class="hero-text fade-in">
+                <h2>Hi, welcome to my portfolio.</h2>
+                <h1>I'm Raffy Temporal</h1>
+                <p>An Information Technology Professional highly analytical, innovative, and dedicated to delivering effective IT solutions, network management, and technical support.</p>
+                <a href="#about" class="btn-contact" style="display: inline-block; font-size: 1.1rem; padding: 12px 30px !important;">Know More About Me</a>
+            </div>
+
+            <!-- POP-OUT IMAGE WRAPPER -->
+            <div class="hero-image-wrapper fade-in">
+                <!-- Eto yung background shape -->
+                <div class="hero-shape"></div>
+                <!-- PALITAN ANG SRC NG PNG PICTURE MO (WALANG BACKGROUND) -->
+                <!-- Use a transparent PNG so your head pops out of the blue box -->
+                <img src="profile.png" alt="Raffy Temporal">
+            </div>
+        </div>
     </header>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <h2>About Me</h2>
-        <p>I am an IT graduate with a major in Computer Programming and hands-on experience in hardware/software troubleshooting, networking, system deployment, and IT project implementation. I am skilled in web programming, MIS form development, and IT support systems. I pride myself on being highly analytical, innovative, and effective in both team and independent work environments.</p>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="section">
-        <h2>Professional Experience</h2>
-        <div class="timeline-grid">
-            <div class="timeline-card">
-                <h3>IT Support Officer</h3>
-                <h4 class="highlight">DFNN Inc. | Aug 2024 - Present</h4>
-                <p>Provide technical support for hardware, software, and network-related issues across the organization. Install, configure, and maintain CCTV systems to strengthen security while ensuring minimal downtime across all IT systems. Assist in IT infrastructure setup for new office expansions and upgrades, deploy OS Ticket as the company’s IT ticketing system, and develop Management Information System (MIS) forms to streamline data collection.</p>
-            </div>
-            <div class="timeline-card">
-                <h3>Computer Technician / Engineering Staff</h3>
-                <h4 class="highlight">North Valley Engineering Services | Jul 2023 - Jun 2024</h4>
-                <p>Conducted computer troubleshooting, repairs, and preventive maintenance. Installed and configured computer networks and cabling for client projects. Assisted in preparing technical documents, supported electrical wiring installations, and collaborated directly with engineers to deliver robust technical solutions.</p>
+    <!-- ABOUT / PROFILE SECTION -->
+    <section id="about" class="container fade-in">
+        <h2 class="section-title">About Me</h2>
+        <div class="card">
+            <p style="font-size: 1.1rem; text-align: justify;">IT graduate with a major in Computer Programming and hands-on experience in hardware/software troubleshooting, networking, system deployment, and IT project implementation. Skilled in web programming, MIS form development, and IT support systems. Effective in both team collaborations and independent work setups.</p>
+            
+            <div class="info-grid" id="contact">
+                <div class="info-item"><i class="fas fa-phone-alt"></i> <strong>Phone:</strong><br>09610037900</div>
+                <div class="info-item"><i class="fas fa-envelope"></i> <strong>Email:</strong><br>raffytemporal20@gmail.com</div>
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong><br>13 Hornet St. Palar, Taguig City</div>
+                <div class="info-item"><i class="fas fa-graduation-cap"></i> <strong>Degree:</strong><br>BS Information Technology</div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <h2>Key Projects</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <h3>NFC Digital Calling Card</h3>
-                <p>Led the migration of traditional company IDs to NFC-enabled smart cards, providing dual functionality for secure building access and digital business card sharing.</p>
-            </div>
-            <div class="project-card">
-                <h3>MIS Forms Development</h3>
-                <p>Designed and maintained electronic Management Information System forms for IT operations to streamline workflows and improve internal reporting accuracy.</p>
-            </div>
-            <div class="project-card">
-                <h3>OS Ticket Deployment</h3>
-                <p>Assisted in the setup and configuration of OS Ticket, defining helpdesk workflows for request logging, escalation, and resolution to improve IT tracking times.</p>
-            </div>
-            <div class="project-card">
-                <h3>Asset Inventory System</h3>
-                <p>Proposed and deployed a centralized Asset Inventory System to efficiently track, manage, and audit IT hardware and software assets across the organization.</p>
+    <!-- TECHNICAL SKILLS SECTION -->
+    <section id="skills" class="bg-white fade-in">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-container">
+                <div class="skill-group">
+                    <h3><i class="fas fa-network-wired" style="color: var(--secondary-blue);"></i> Networking & Cloud</h3>
+                    <div class="badge-list">
+                        <span class="badge">Routers & Switches</span>
+                        <span class="badge">TCP/IP</span>
+                        <span class="badge">DHCP & DNS</span>
+                        <span class="badge">LAN/WAN</span>
+                        <span class="badge">Google Workspace</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h3><i class="fas fa-laptop-code" style="color: var(--secondary-blue);"></i> OS & RMM Tools</h3>
+                    <div class="badge-list">
+                        <span class="badge">Windows & macOS</span>
+                        <span class="badge">VirtualBox</span>
+                        <span class="badge">PowerShell</span>
+                        <span class="badge">TeamViewer</span>
+                        <span class="badge">AnyDesk</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h3><i class="fas fa-tools" style="color: var(--secondary-blue);"></i> Systems & Hardware</h3>
+                    <div class="badge-list">
+                        <span class="badge">Smart ID (NFC/RFID)</span>
+                        <span class="badge">Lilin CCTV (NVR/POS)</span>
+                        <span class="badge">Grandstream & Meeting Owl</span>
+                        <span class="badge">MS Office 365</span>
+                        <span class="badge">PC Setup & Repair</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills & Certifications Section -->
-    <section id="skills" class="section">
-        <h2>Technical Skills & Certifications</h2>
-        <div class="skills-container">
-            <p><strong>Networking & Infrastructure:</strong> Routers, Switches, TCP/IP, DHCP, DNS, LAN/WAN</p>
-            <p><strong>Operating Systems & Cloud:</strong> Windows, macOS, PowerShell, VirtualBox, Google Workspace</p>
-            <p><strong>Hardware & Security:</strong> PC Setup & Repair, Lilin CCTV NVR, Smart ID NFC/RFID Access Control</p>
-            <p><strong>IT Support & RMM Tools:</strong> TeamViewer, AnyDesk, OS Ticket, MS Office 365</p>
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience" class="container fade-in">
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">August 2024 - Present</div>
+                <div class="timeline-title">IT Support Officer</div>
+                <div class="timeline-company"><i class="fas fa-building"></i> DFNN Inc. | BGC, Taguig</div>
+                <ul>
+                    <li>Provided technical support for hardware, software, and network-related issues.</li>
+                    <li>Installed, configured, and maintained CCTV systems to strengthen security.</li>
+                    <li>Conducted troubleshooting to ensure minimal downtime across IT systems.</li>
+                    <li>Assisted in IT infrastructure setup for new office expansions and upgrades.</li>
+                    <li>Led the upgrade of Employee ID system into NFC-enabled cards serving as both access IDs and Digital Calling Cards.</li>
+                    <li>Developed and maintained Management Information System (MIS) forms for the IT department.</li>
+                    <li>Participated in deploying OS Ticket as the company’s IT ticketing system.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">July 2023 - June 2024</div>
+                <div class="timeline-title">Computer Technician / Engineering Staff</div>
+                <div class="timeline-company"><i class="fas fa-building"></i> North Valley Engineering Services | Sta. Rosa, Laguna</div>
+                <ul>
+                    <li>Conducted computer troubleshooting, repairs, and preventive maintenance.</li>
+                    <li>Installed and configured computer networks and cabling for client projects.</li>
+                    <li>Assisted in preparing technical documents and engineering reports.</li>
+                    <li>Supported electrical wiring installations and project site work.</li>
+                </ul>
+            </div>
         </div>
-        <br>
-        <h3>Certifications</h3>
-        <ul class="skills-list">
-            <li>Construction Safety & Health (Safety Officer 1)</li>
-            <li>Computer System Servicing (CSS) NCII Passer</li>
-        </ul>
     </section>
 
-    <!-- Education Section -->
-    <section id="education" class="section">
-        <h2>Education</h2>
-        <div class="timeline-card">
-            <h3>Bachelor of Science in Information Technology</h3>
-            <h4 class="highlight">Cagayan State University | 2019 - 2023</h4>
-            <p>Major in Computer Programming</p>
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="bg-white fade-in">
+        <div class="container">
+            <h2 class="section-title">Projects Handled</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3><i class="fas fa-id-card"></i> NFC Digital Calling Card</h3>
+                    <p>Migrated traditional IDs to NFC-enabled smart cards with dual functions (building access + digital business card) for DFNN Inc.</p>
+                </div>
+                <div class="project-card">
+                    <h3><i class="fas fa-file-alt"></i> MIS Forms Deployment</h3>
+                    <p>Designed and maintained electronic MIS forms for IT operations, streamlining workflows and improving internal reporting accuracy.</p>
+                </div>
+                <div class="project-card">
+                    <h3><i class="fas fa-ticket-alt"></i> OS Ticket Deployment</h3>
+                    <p>Assisted in setup, configuration, and defining workflows for request logging, escalation, and resolution using the OS Ticket system.</p>
+                </div>
+                <div class="project-card">
+                    <h3><i class="fas fa-boxes"></i> Asset Inventory System</h3>
+                    <p>Proposed and assisted in the deployment of an Asset Inventory System to track and manage IT infrastructure and assets efficiently.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <h2>Contact Me</h2>
-        <p>I am always open to discussing new opportunities, collaborations, or technical projects.</p>
-        <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-        <!-- Update the email address above with your actual email -->
+    <!-- EDUCATION & CERTIFICATIONS -->
+    <section class="container fade-in">
+        <div class="projects-grid">
+            <div>
+                <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 20px;">Education</h2>
+                <div class="card" style="height: 100%;">
+                    <div class="timeline-title" style="font-size: 1.2rem;">BS Information Technology</div>
+                    <div class="timeline-company">Cagayan State University – Sanchez Mira Campus</div>
+                    <p style="color: var(--text-light);"><i class="fas fa-calendar-alt"></i> 2019 – 2023</p>
+                </div>
+            </div>
+            
+            <div>
+                <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 20px;">Certifications</h2>
+                <div class="card" style="height: 100%;">
+                    <ul style="list-style-position: inside;">
+                        <li style="margin-bottom: 15px;"><strong>Construction Safety & Health (Safety Officer 1)</strong> <br><span style="color: var(--text-light); font-size: 0.9rem;">February 2024</span></li>
+                        <li><strong>Computer System Servicing (CSS) NCII Passer</strong> <br><span style="color: var(--text-light); font-size: 0.9rem;">February 2019</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </section>
+<br><br><br><br>
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Raffy Temporal. All Rights Reserved. | <i class="fas fa-code"></i> IT Professional Portfolio</p>
+    </footer>
 
-    <script src="script.js"></script>
+    <!-- JAVASCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const menuBtn = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            menuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('.nav-links li a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // Scroll Animation Setup
+            const faders = document.querySelectorAll('.fade-in');
+            const appearOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+        });
+    </script>
 </body>
 </html>
