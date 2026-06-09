@@ -4,17 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raffy Temporal | IT Professional</title>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         /* --- CSS VARIABLES (BLUE THEME) --- */
         :root {
-            --primary-blue: #0a3d6b; /* Deep Professional Blue */
-            --secondary-blue: #1e81b0; /* Mid Blue */
-            --accent-blue: #e0f2fe; /* Very Light Blue */
+            --primary-blue: #0a3d6b;
+            --secondary-blue: #1e81b0;
+            --accent-blue: #e0f2fe;
             --nav-bg: rgba(255, 255, 255, 0.95);
             --text-dark: #2d3748;
             --text-light: #718096;
@@ -30,21 +28,21 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        html {
-            scroll-behavior: smooth; /* Smooth scrolling for navbar links */
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.6;
-            padding-top: 70px; /* Space for fixed navbar */
+            padding-top: 70px;
+            overflow-x: hidden; /* Prevents horizontal scroll on mobile */
         }
 
         h1, h2, h3 { color: var(--primary-blue); }
         a { text-decoration: none; color: inherit; }
 
         .container {
+            width: 100%;
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px;
@@ -75,19 +73,14 @@
             padding: 0 20px;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-blue);
-            letter-spacing: 1px;
-        }
-
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-blue); letter-spacing: 1px; }
         .logo span { color: var(--secondary-blue); }
 
         .nav-links {
             display: flex;
             gap: 25px;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links li a {
@@ -99,10 +92,7 @@
             border-radius: 5px;
         }
 
-        .nav-links li a:hover {
-            color: var(--secondary-blue);
-            background: var(--accent-blue);
-        }
+        .nav-links li a:hover { color: var(--secondary-blue); background: var(--accent-blue); }
 
         .btn-contact {
             background-color: var(--primary-blue);
@@ -110,17 +100,14 @@
             padding: 8px 20px !important;
             border-radius: 20px !important;
             transition: background 0.3s, transform 0.2s !important;
+            display: inline-block;
         }
 
-        .btn-contact:hover {
-            background-color: var(--secondary-blue);
-            transform: translateY(-2px);
-        }
+        .btn-contact:hover { background-color: var(--secondary-blue); transform: translateY(-2px); }
 
-        /* Mobile Menu Icon */
         .menu-toggle {
             display: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--primary-blue);
             cursor: pointer;
         }
@@ -147,16 +134,12 @@
             border-radius: 2px;
         }
 
-        /* Animation Class */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
 
         /* --- HERO SECTION --- */
         header {
@@ -164,50 +147,38 @@
             color: var(--white);
             padding: 100px 0 120px 0;
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            position: relative;
         }
 
         .hero-content {
             display: flex;
             align-items: center;
-            gap: 60px;
+            gap: 40px;
             justify-content: space-between;
         }
 
-        .hero-text { flex: 1; }
-        .hero-text h1 {
-            color: var(--white);
-            font-size: 3.5rem;
-            line-height: 1.1;
-            margin-bottom: 15px;
-        }
-        .hero-text h2 {
-            color: var(--accent-blue);
-            font-size: 1.5rem;
-            font-weight: 400;
-            margin-bottom: 25px;
-        }
-        .hero-text p {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
+        .hero-text { flex: 1; z-index: 2;}
+        .hero-text h1 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 15px; color: var(--white);}
+        .hero-text h2 { color: var(--accent-blue); font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-weight: 400; margin-bottom: 25px; }
+        .hero-text p { font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9; }
 
-        /* POP-OUT / CLIPPING MASK EFFECT CSS */
+        /* POP-OUT / CLIPPING MASK EFFECT */
         .hero-image-wrapper {
-            flex: 0 0 350px;
+            flex: 0 0 400px;
+            max-width: 100%;
             position: relative;
             height: 450px;
             display: flex;
             justify-content: center;
-            align-items: flex-end; /* Aligns image to bottom */
+            align-items: flex-end;
+            margin: 0 auto;
         }
 
-        /* The Box/Shape behind the person */
         .hero-shape {
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 75%; /* Lower height so the head pops out */
+            height: 75%;
             background-color: var(--accent-blue);
             border-radius: 30px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
@@ -215,44 +186,43 @@
             border: 5px solid rgba(255,255,255,0.2);
         }
 
-        /* The Transparent PNG Image */
         .hero-image-wrapper img {
             position: relative;
-            z-index: 2; /* Sits on top of the shape */
-            width: 120%; /* Slightly wider than the box */
-            max-height: 110%; /* Taller than the box so head pops out */
+            z-index: 2;
+            width: 110%;
+            max-height: 115%;
             object-fit: cover;
             object-position: bottom;
             display: block;
         }
 
         /* --- SECTIONS --- */
-        section { padding: 90px 0; }
+        section { padding: 80px 0; }
         .bg-white { background-color: var(--white); }
 
         .card {
             background: var(--white);
-            padding: 40px;
+            padding: clamp(20px, 4vw, 40px); /* Responsive padding */
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             border-top: 5px solid var(--secondary-blue);
         }
 
-        /* Info Grid (Contact info moved inside Profile) */
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
             margin-top: 30px;
             padding-top: 20px;
             border-top: 1px solid #e2e8f0;
         }
         .info-item i { color: var(--secondary-blue); margin-right: 10px; width: 20px;}
+        .info-item { word-break: break-word; } /* Prevents email from breaking layout */
 
         /* Skills */
         .skills-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Adjusted for mobile */
             gap: 30px;
         }
         .skill-group h3 { margin-bottom: 15px; }
@@ -260,103 +230,123 @@
         .badge {
             background-color: var(--accent-blue);
             color: var(--primary-blue);
-            padding: 10px 18px;
+            padding: 8px 16px;
             border-radius: 30px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             border: 1px solid rgba(30, 129, 176, 0.2);
-            transition: all 0.3s;
-        }
-        .badge:hover {
-            background-color: var(--primary-blue);
-            color: var(--white);
         }
 
         /* Experience Timeline */
         .timeline { max-width: 800px; margin: 0 auto; }
         .timeline-item {
-            padding-left: 30px;
-            border-left: 4px solid var(--accent-blue);
+            padding-left: 25px;
+            border-left: 3px solid var(--accent-blue);
             margin-bottom: 40px;
             position: relative;
         }
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -12px;
+            left: -10px;
             top: 0;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             background: var(--secondary-blue);
             border-radius: 50%;
-            box-shadow: 0 0 0 4px var(--white);
+            box-shadow: 0 0 0 4px var(--bg-light); /* Matches background to look clean */
         }
-        .timeline-date { color: var(--secondary-blue); font-weight: 700; margin-bottom: 5px;}
-        .timeline-title { font-size: 1.3rem; margin-bottom: 5px; }
-        .timeline-company { color: var(--text-light); font-style: italic; margin-bottom: 15px; }
-        .timeline-item ul { padding-left: 20px; color: var(--text-dark); }
-        .timeline-item ul li { margin-bottom: 10px; }
+        .timeline-date { color: var(--secondary-blue); font-weight: 700; margin-bottom: 5px; font-size: 0.9rem;}
+        .timeline-title { font-size: 1.2rem; margin-bottom: 5px; }
+        .timeline-company { color: var(--text-light); font-style: italic; margin-bottom: 15px; font-size: 0.9rem;}
+        .timeline-item ul { padding-left: 15px; color: var(--text-dark); font-size: 0.95rem;}
+        .timeline-item ul li { margin-bottom: 8px; }
 
         /* Projects Grid */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive columns */
+            gap: 25px;
         }
         .project-card {
             background: var(--bg-light);
-            padding: 30px;
+            padding: 25px;
             border-radius: 15px;
             border: 1px solid #e2e8f0;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s;
         }
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-        .project-card h3 { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .project-card h3 i { background: var(--accent-blue); padding: 15px; border-radius: 50%; }
+        .project-card:hover { transform: translateY(-5px); }
+        .project-card h3 { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 1.1rem;}
+        .project-card h3 i { background: var(--accent-blue); padding: 12px; border-radius: 50%; font-size: 1rem;}
+        .project-card p { font-size: 0.95rem; }
 
-        /* Footer */
         footer {
             background-color: var(--primary-blue);
             color: var(--white);
             text-align: center;
-            padding: 30px 0;
+            padding: 25px 20px;
+            font-size: 0.9rem;
         }
 
-        /* --- RESPONSIVE / MOBILE DESIGN --- */
-        @media (max-width: 768px) {
-            .hero-content { flex-direction: column-reverse; text-align: center; gap: 40px;}
-            header { clip-path: none; padding: 60px 0; }
-            .hero-image-wrapper { height: 350px; width: 80%; }
-            .hero-shape { height: 70%; }
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 850px) {
+            header {
+                padding: 100px 0 60px 0;
+                clip-path: none; /* Remove slant on smaller screens for better spacing */
+            }
+            .hero-content {
+                flex-direction: column-reverse; /* Put image on top, text below */
+                text-align: center;
+                gap: 50px;
+            }
+            .hero-image-wrapper {
+                flex: 0 0 320px;
+                height: 350px;
+                width: 90%;
+            }
             .hero-text h1 { font-size: 2.5rem; }
+            .hero-text h2 { font-size: 1.3rem; }
+            .hero-text p { font-size: 1rem; }
             
-            /* Mobile Navbar */
+            /* Navbar adjustments for mobile */
             .menu-toggle { display: block; }
             .nav-links {
-                position: absolute;
+                position: fixed;
                 top: 70px;
-                left: -100%;
+                right: -100%;
                 flex-direction: column;
                 background: var(--nav-bg);
                 width: 100%;
+                height: calc(100vh - 70px);
                 text-align: center;
-                padding: 20px 0;
-                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
-                transition: left 0.3s;
+                padding-top: 40px;
+                transition: right 0.4s ease;
+                box-shadow: -5px 10px 15px rgba(0,0,0,0.1);
             }
-            .nav-links.active { left: 0; }
+            .nav-links.active { right: 0; }
+            .nav-links li { margin-bottom: 25px; }
+            .nav-links li a { font-size: 1.2rem; display: inline-block; width: 100%;}
+            
+            section { padding: 60px 0; }
+            .section-title { font-size: 1.8rem; margin-bottom: 2rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-image-wrapper {
+                flex: 0 0 280px;
+                height: 300px;
+            }
+            .projects-grid { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVIGATION BAR -->
     <nav>
         <div class="nav-container">
             <div class="logo">Raffy<span>.IT</span></div>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -365,36 +355,29 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact" class="btn-contact">Contact Me</a></li>
             </ul>
-            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
     <header id="home">
         <div class="container hero-content">
             <div class="hero-text fade-in">
                 <h2>Hi, welcome to my portfolio.</h2>
                 <h1>I'm Raffy Temporal</h1>
                 <p>An Information Technology Professional highly analytical, innovative, and dedicated to delivering effective IT solutions, network management, and technical support.</p>
-                <a href="#about" class="btn-contact" style="display: inline-block; font-size: 1.1rem; padding: 12px 30px !important;">Know More About Me</a>
+                <a href="#about" class="btn-contact" style="padding: 12px 30px !important; font-size: 1.05rem;">Know More About Me</a>
             </div>
 
-            <!-- POP-OUT IMAGE WRAPPER -->
             <div class="hero-image-wrapper fade-in">
-                <!-- Eto yung background shape -->
                 <div class="hero-shape"></div>
-                <!-- PALITAN ANG SRC NG PNG PICTURE MO (WALANG BACKGROUND) -->
-                <!-- Use a transparent PNG so your head pops out of the blue box -->
                 <img src="profile.png" alt="Raffy Temporal">
             </div>
         </div>
     </header>
 
-    <!-- ABOUT / PROFILE SECTION -->
     <section id="about" class="container fade-in">
         <h2 class="section-title">About Me</h2>
         <div class="card">
-            <p style="font-size: 1.1rem; text-align: justify;">IT graduate with a major in Computer Programming and hands-on experience in hardware/software troubleshooting, networking, system deployment, and IT project implementation. Skilled in web programming, MIS form development, and IT support systems. Effective in both team collaborations and independent work setups.</p>
+            <p style="text-align: justify; font-size: 1.05rem;">IT graduate with a major in Computer Programming and hands-on experience in hardware/software troubleshooting, networking, system deployment, and IT project implementation. Skilled in web programming, MIS form development, and IT support systems. Effective in both team collaborations and independent work setups.</p>
             
             <div class="info-grid" id="contact">
                 <div class="info-item"><i class="fas fa-phone-alt"></i> <strong>Phone:</strong><br>09610037900</div>
@@ -405,7 +388,6 @@
         </div>
     </section>
 
-    <!-- TECHNICAL SKILLS SECTION -->
     <section id="skills" class="bg-white fade-in">
         <div class="container">
             <h2 class="section-title">Technical Skills</h2>
@@ -444,7 +426,6 @@
         </div>
     </section>
 
-    <!-- EXPERIENCE SECTION -->
     <section id="experience" class="container fade-in">
         <h2 class="section-title">Professional Experience</h2>
         <div class="timeline">
@@ -457,15 +438,15 @@
                     <li>Installed, configured, and maintained CCTV systems to strengthen security.</li>
                     <li>Conducted troubleshooting to ensure minimal downtime across IT systems.</li>
                     <li>Assisted in IT infrastructure setup for new office expansions and upgrades.</li>
-                    <li>Led the upgrade of Employee ID system into NFC-enabled cards serving as both access IDs and Digital Calling Cards.</li>
-                    <li>Developed and maintained Management Information System (MIS) forms for the IT department.</li>
+                    <li>Led the upgrade of Employee ID system into NFC-enabled cards.</li>
+                    <li>Developed and maintained Management Information System (MIS) forms.</li>
                     <li>Participated in deploying OS Ticket as the company’s IT ticketing system.</li>
                 </ul>
             </div>
 
             <div class="timeline-item">
                 <div class="timeline-date">July 2023 - June 2024</div>
-                <div class="timeline-title">Computer Technician / Engineering Staff</div>
+                <div class="timeline-title">Computer Tech / Engineering Staff</div>
                 <div class="timeline-company"><i class="fas fa-building"></i> North Valley Engineering Services | Sta. Rosa, Laguna</div>
                 <ul>
                     <li>Conducted computer troubleshooting, repairs, and preventive maintenance.</li>
@@ -477,83 +458,89 @@
         </div>
     </section>
 
-    <!-- PROJECTS SECTION -->
     <section id="projects" class="bg-white fade-in">
         <div class="container">
             <h2 class="section-title">Projects Handled</h2>
             <div class="projects-grid">
                 <div class="project-card">
                     <h3><i class="fas fa-id-card"></i> NFC Digital Calling Card</h3>
-                    <p>Migrated traditional IDs to NFC-enabled smart cards with dual functions (building access + digital business card) for DFNN Inc.</p>
+                    <p>Migrated traditional IDs to NFC-enabled smart cards with dual functions for DFNN Inc.</p>
                 </div>
                 <div class="project-card">
                     <h3><i class="fas fa-file-alt"></i> MIS Forms Deployment</h3>
-                    <p>Designed and maintained electronic MIS forms for IT operations, streamlining workflows and improving internal reporting accuracy.</p>
+                    <p>Designed and maintained electronic MIS forms for IT operations, streamlining workflows.</p>
                 </div>
                 <div class="project-card">
                     <h3><i class="fas fa-ticket-alt"></i> OS Ticket Deployment</h3>
-                    <p>Assisted in setup, configuration, and defining workflows for request logging, escalation, and resolution using the OS Ticket system.</p>
+                    <p>Assisted in setup, configuration, and defining workflows for request logging.</p>
                 </div>
                 <div class="project-card">
                     <h3><i class="fas fa-boxes"></i> Asset Inventory System</h3>
-                    <p>Proposed and assisted in the deployment of an Asset Inventory System to track and manage IT infrastructure and assets efficiently.</p>
+                    <p>Proposed and assisted in the deployment of an Asset Inventory System to track IT infrastructure.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- EDUCATION & CERTIFICATIONS -->
-    <section class="container fade-in">
+    <section class="container fade-in" style="padding-bottom: 100px;">
         <div class="projects-grid">
             <div>
                 <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 20px;">Education</h2>
                 <div class="card" style="height: 100%;">
                     <div class="timeline-title" style="font-size: 1.2rem;">BS Information Technology</div>
                     <div class="timeline-company">Cagayan State University – Sanchez Mira Campus</div>
-                    <p style="color: var(--text-light);"><i class="fas fa-calendar-alt"></i> 2019 – 2023</p>
+                    <p style="color: var(--text-light); font-size: 0.9rem;"><i class="fas fa-calendar-alt"></i> 2019 – 2023</p>
                 </div>
             </div>
             
             <div>
                 <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 20px;">Certifications</h2>
                 <div class="card" style="height: 100%;">
-                    <ul style="list-style-position: inside;">
-                        <li style="margin-bottom: 15px;"><strong>Construction Safety & Health (Safety Officer 1)</strong> <br><span style="color: var(--text-light); font-size: 0.9rem;">February 2024</span></li>
-                        <li><strong>Computer System Servicing (CSS) NCII Passer</strong> <br><span style="color: var(--text-light); font-size: 0.9rem;">February 2019</span></li>
+                    <ul style="list-style-position: inside; font-size: 0.95rem;">
+                        <li style="margin-bottom: 15px;"><strong>Construction Safety & Health (SO1)</strong> <br><span style="color: var(--text-light); font-size: 0.85rem; padding-left: 20px;">February 2024</span></li>
+                        <li><strong>Computer System Servicing (CSS) NCII</strong> <br><span style="color: var(--text-light); font-size: 0.85rem; padding-left: 20px;">February 2019</span></li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
-<br><br><br><br>
-    <!-- FOOTER -->
+
     <footer>
         <p>&copy; 2026 Raffy Temporal. All Rights Reserved. | <i class="fas fa-code"></i> IT Professional Portfolio</p>
     </footer>
 
-    <!-- JAVASCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Mobile Menu Toggle
+            // Mobile Menu Toggle (Responsive Fix)
             const menuBtn = document.querySelector('.menu-toggle');
             const navLinks = document.querySelector('.nav-links');
+            const menuIcon = document.querySelector('.menu-toggle i');
             
             menuBtn.addEventListener('click', () => {
                 navLinks.classList.toggle('active');
+                if(navLinks.classList.contains('active')) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                } else {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                }
             });
 
             // Close mobile menu when a link is clicked
             document.querySelectorAll('.nav-links li a').forEach(link => {
                 link.addEventListener('click', () => {
                     navLinks.classList.remove('active');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
                 });
             });
 
             // Scroll Animation Setup
             const faders = document.querySelectorAll('.fade-in');
             const appearOptions = {
-                threshold: 0.15,
-                rootMargin: "0px 0px -50px 0px"
+                threshold: 0.1, // Trigger earlier on mobile
+                rootMargin: "0px 0px -30px 0px"
             };
 
             const appearOnScroll = new IntersectionObserver(function(entries, observer) {
